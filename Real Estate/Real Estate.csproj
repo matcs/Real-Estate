@@ -36,6 +36,20 @@
     <Compile Remove="Migrations\20200817175025_initial.Designer.cs" />
     <Compile Remove="Migrations\20200818165726_initial.cs" />
     <Compile Remove="Migrations\20200818165726_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200818170608_initial.cs" />
+    <Compile Remove="Migrations\20200818170608_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200818184422_initial.cs" />
+    <Compile Remove="Migrations\20200818184422_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200818184548_initial.cs" />
+    <Compile Remove="Migrations\20200818184548_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200818185023_initial.cs" />
+    <Compile Remove="Migrations\20200818185023_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200818195744_initial.cs" />
+    <Compile Remove="Migrations\20200818195744_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200818201106_initial.cs" />
+    <Compile Remove="Migrations\20200818201106_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200818202031_initial.cs" />
+    <Compile Remove="Migrations\20200818202031_initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,10 +68,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Nancy" Version="2.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

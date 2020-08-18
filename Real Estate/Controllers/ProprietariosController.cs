@@ -46,6 +46,7 @@ namespace Real_Estate.Controllers
                      imovel.cod_imovel,
                      imovel.descricao,
                      imovel.metro_quadrado,
+                     imovel._tipoImovel,
                      endereco.logradouro,
                      endereco.rua,
                      endereco.numero,

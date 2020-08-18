@@ -25,10 +25,13 @@ namespace Real_Estate.Model
         [Column(TypeName = "TINYINT")]
         public int numero_vagas { get; set; }
 
-        [Column(TypeName = "SMALLMONEY")]
+        [Column(TypeName = "DECIMAL(5,2)")]
         public float valor_p_metro2 { get; set; }
 
-        public Proprietario Proprietario { get; set; }
+        [Column(TypeName = "INT")]
+        public Proprietario proprietario { get; set; }
+
+        [Column(TypeName = "INT")]
         public Imovel Imovel { get; set; }
 
         public Casa() { }

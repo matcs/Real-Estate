@@ -16,14 +16,17 @@ namespace Real_Estate.Model
         public string nome_bloco { get; set; }
 
         [Column(TypeName = "TINYINT")]
-        public char numero_bloco { get; set; }
+        public int numero_bloco { get; set; }
 
+        [Column(TypeName = "INT")]
         public Proprietario Proprietario { get; set; }
+
+        [Column(TypeName = "INT")]
         public Imovel Imovel { get; set; }
 
         public Apartamento ( ) { }
 
-        public Apartamento(string nome_bloco, char numero_bloco)
+        public Apartamento(string nome_bloco, int numero_bloco)
         {
             this.nome_bloco = nome_bloco;
             this.numero_bloco = numero_bloco;

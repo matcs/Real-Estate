@@ -12,11 +12,11 @@ namespace Real_Estate.Model
         [Key]
         public int cod_endereco { get; set; }
 
-        [Column(TypeName = "VARCHAR(40)")]
-        public string rua { get; set; }
-
         [Column(TypeName = "VARCHAR(15)")]
         public string logradouro { get; set; }
+
+        [Column(TypeName = "VARCHAR(40)")]
+        public string rua { get; set; }
 
         [Column(TypeName = "VARCHAR(25)")]
         public string bairro { get; set; }

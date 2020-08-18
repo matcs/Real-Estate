@@ -30,8 +30,7 @@ namespace Real_Estate.Controllers
                  join endereco in _context.Enderecos
                  on imovel.endereco.cod_endereco equals endereco.cod_endereco
                  select new
-                 {  
-                     imovel,
+                 {                      
                      endereco.logradouro,
                      endereco.rua,
                      endereco.numero,

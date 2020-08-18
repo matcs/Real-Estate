@@ -12,8 +12,8 @@ namespace Real_Estate.Migrations
                 {
                     cod_endereco = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    rua = table.Column<string>(type: "VARCHAR(40)", nullable: true),
                     logradouro = table.Column<string>(type: "VARCHAR(15)", nullable: true),
+                    rua = table.Column<string>(type: "VARCHAR(40)", nullable: true),
                     bairro = table.Column<string>(type: "VARCHAR(25)", nullable: true),
                     numero = table.Column<string>(type: "VARCHAR(15)", nullable: true),
                     municipio = table.Column<string>(type: "VARCHAR(30)", nullable: true),
@@ -52,7 +52,7 @@ namespace Real_Estate.Migrations
                     descricao = table.Column<string>(type: "TEXT", nullable: true),
                     numero_quartos = table.Column<byte>(type: "TINYINT", nullable: false),
                     numero_banheiros = table.Column<byte>(type: "TINYINT", nullable: false),
-                    _tipoImove = table.Column<string>(type: "VARCHAR(15)", nullable: false),
+                    _tipoImovel = table.Column<int>(type: "INT", nullable: false),
                     proprietariocod_proprietario = table.Column<int>(nullable: true),
                     enderecocod_endereco = table.Column<int>(nullable: true)
                 },
@@ -111,8 +111,8 @@ namespace Real_Estate.Migrations
                     quintal = table.Column<bool>(type: "BIT", nullable: false),
                     garagem = table.Column<bool>(type: "BIT", nullable: false),
                     numero_vagas = table.Column<byte>(type: "TINYINT", nullable: false),
-                    valor_p_metro2 = table.Column<decimal>(type: "SMALLMONEY", nullable: false),
-                    Proprietariocod_proprietario = table.Column<int>(nullable: true),
+                    valor_p_metro2 = table.Column<decimal>(type: "DECIMAL(5,2)", nullable: false),
+                    proprietariocod_proprietario = table.Column<int>(nullable: true),
                     Imovelcod_imovel = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -125,11 +125,55 @@ namespace Real_Estate.Migrations
                         principalColumn: "cod_imovel",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Casas_Proprietarios_Proprietariocod_proprietario",
-                        column: x => x.Proprietariocod_proprietario,
+                        name: "FK_Casas_Proprietarios_proprietariocod_proprietario",
+                        column: x => x.proprietariocod_proprietario,
                         principalTable: "Proprietarios",
                         principalColumn: "cod_proprietario",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Apartamentos",
+                columns: new[] { "cod_apartamento", "Imovelcod_imovel", "Proprietariocod_proprietario", "nome_bloco", "numero_bloco" },
+                values: new object[] { 1, null, null, "Andorinha", (byte)57 });
+
+            migrationBuilder.InsertData(
+                table: "Casas",
+                columns: new[] { "cod_casa", "Imovelcod_imovel", "garagem", "numero_vagas", "proprietariocod_proprietario", "quintal", "tipo", "valor_p_metro2" },
+                values: new object[,]
+                {
+                    { 1, null, true, (byte)1, null, true, "HomeTown", 25m },
+                    { 2, null, true, (byte)1, null, false, "Duplex", 30m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Enderecos",
+                columns: new[] { "cod_endereco", "bairro", "cep", "estado", "logradouro", "municipio", "numero", "rua" },
+                values: new object[,]
+                {
+                    { 1, "Vila Yara", "06026-050", "SP", "Rua", "Osasco", "463", "Silverio Sasso" },
+                    { 2, "Vila dos Remédios", "02675-031", "SP", "Avenida", "São Paulo", "4561a", "dos Remedios" },
+                    { 3, "Palm Desert", "92211", "CA", "Rua", "California", "75245", "Vista Corona" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Imoveis",
+                columns: new[] { "cod_imovel", "_tipoImovel", "comprimento", "descricao", "enderecocod_endereco", "largura", "metro_quadrado", "numero_banheiros", "numero_quartos", "proprietariocod_proprietario" },
+                values: new object[,]
+                {
+                    { 1, 0, 25m, "Lugar agradavel com vista para calçada!", null, 25m, 625m, (byte)1, (byte)4, null },
+                    { 2, 0, 51m, "Lindo, apenas.", null, 50m, 2550m, (byte)2, (byte)5, null },
+                    { 3, 1, 20m, "Apartamento com uma varanda linda para o mar!", null, 20m, 400m, (byte)1, (byte)2, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Proprietarios",
+                columns: new[] { "cod_proprietario", "email", "nome_proprietario", "telefone" },
+                values: new object[,]
+                {
+                    { 1, "matmau11@hotmail.com", "Matheus Costa dos Santos", "954946842" },
+                    { 2, "maumau11@hotmail.com", "Mauricio Potter dos Santos", "986174471" },
+                    { 3, "dorivalodbrok@hotmail.com", "Dorival Lodbrok", "979564471" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -148,9 +192,9 @@ namespace Real_Estate.Migrations
                 column: "Imovelcod_imovel");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Casas_Proprietariocod_proprietario",
+                name: "IX_Casas_proprietariocod_proprietario",
                 table: "Casas",
-                column: "Proprietariocod_proprietario");
+                column: "proprietariocod_proprietario");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Imoveis_enderecocod_endereco",

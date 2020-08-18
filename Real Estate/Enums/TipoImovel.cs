@@ -7,7 +7,7 @@ namespace Real_Estate.Enums
 {
     public enum TipoImovel
     {
-        Casa,
-        Apartamento
+        Casa = 0,
+        Apartamento = 1,
     }
 }

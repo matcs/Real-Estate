@@ -32,17 +32,19 @@ namespace Real_Estate.Model
         [Column(TypeName = "TINYINT")]
         public int numero_banheiros { get; set; }
 
-        [Column(TypeName = "VARCHAR(15)")]
-        public TipoImovel _tipoImove { get; set; }
+        [Column(TypeName = "INT")]
+        public TipoImovel _tipoImovel { get; set; }
 
+        [Column(TypeName = "INT")]
         public Proprietario proprietario { get; set; }
 
+        [Column(TypeName = "INT")]
         public Endereco endereco { get; set; }
 
         public Imovel () { }
 
         public Imovel(int cod_imovel, float largura, float comprimento, float metro_quadrado, string descricao, int numero_quartos,
-            int numero_banheiros)
+            int numero_banheiros, TipoImovel tipoImovel)
         {
             this.cod_imovel = cod_imovel;
             this.largura = largura;
@@ -51,6 +53,8 @@ namespace Real_Estate.Model
             this.descricao = descricao;
             this.numero_quartos = numero_quartos;
             this.numero_banheiros = numero_banheiros;
+            this._tipoImovel = tipoImovel;
+
         }
     }
 }

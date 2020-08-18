@@ -10,7 +10,7 @@ using Real_Estate.Data;
 namespace Real_Estate.Migrations
 {
     [DbContext(typeof(RealEstateContext))]
-    [Migration("20200818170608_initial")]
+    [Migration("20200818202849_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,14 @@ namespace Real_Estate.Migrations
                     b.HasIndex("Proprietariocod_proprietario");
 
                     b.ToTable("Apartamentos");
+
+                    b.HasData(
+                        new
+                        {
+                            cod_apartamento = 1,
+                            nome_bloco = "Andorinha",
+                            numero_bloco = (byte)57
+                        });
                 });
 
             modelBuilder.Entity("Real_Estate.Model.Casa", b =>
@@ -59,14 +67,14 @@ namespace Real_Estate.Migrations
                     b.Property<int?>("Imovelcod_imovel")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Proprietariocod_proprietario")
-                        .HasColumnType("int");
-
                     b.Property<bool>("garagem")
                         .HasColumnType("BIT");
 
                     b.Property<byte>("numero_vagas")
                         .HasColumnType("TINYINT");
+
+                    b.Property<int?>("proprietariocod_proprietario")
+                        .HasColumnType("int");
 
                     b.Property<bool>("quintal")
                         .HasColumnType("BIT");
@@ -75,15 +83,35 @@ namespace Real_Estate.Migrations
                         .HasColumnType("VARCHAR(25)");
 
                     b.Property<decimal>("valor_p_metro2")
-                        .HasColumnType("SMALLMONEY");
+                        .HasColumnType("DECIMAL(5,2)");
 
                     b.HasKey("cod_casa");
 
                     b.HasIndex("Imovelcod_imovel");
 
-                    b.HasIndex("Proprietariocod_proprietario");
+                    b.HasIndex("proprietariocod_proprietario");
 
                     b.ToTable("Casas");
+
+                    b.HasData(
+                        new
+                        {
+                            cod_casa = 1,
+                            garagem = true,
+                            numero_vagas = (byte)1,
+                            quintal = true,
+                            tipo = "HomeTown",
+                            valor_p_metro2 = 25m
+                        },
+                        new
+                        {
+                            cod_casa = 2,
+                            garagem = true,
+                            numero_vagas = (byte)1,
+                            quintal = false,
+                            tipo = "Duplex",
+                            valor_p_metro2 = 30m
+                        });
                 });
 
             modelBuilder.Entity("Real_Estate.Model.Endereco", b =>
@@ -117,6 +145,41 @@ namespace Real_Estate.Migrations
                     b.HasKey("cod_endereco");
 
                     b.ToTable("Enderecos");
+
+                    b.HasData(
+                        new
+                        {
+                            cod_endereco = 1,
+                            bairro = "Vila Yara",
+                            cep = "06026-050",
+                            estado = "SP",
+                            logradouro = "Rua",
+                            municipio = "Osasco",
+                            numero = "463",
+                            rua = "Silverio Sasso"
+                        },
+                        new
+                        {
+                            cod_endereco = 2,
+                            bairro = "Vila dos Remédios",
+                            cep = "02675-031",
+                            estado = "SP",
+                            logradouro = "Avenida",
+                            municipio = "São Paulo",
+                            numero = "4561a",
+                            rua = "dos Remedios"
+                        },
+                        new
+                        {
+                            cod_endereco = 3,
+                            bairro = "Palm Desert",
+                            cep = "92211",
+                            estado = "CA",
+                            logradouro = "Rua",
+                            municipio = "California",
+                            numero = "75245",
+                            rua = "Vista Corona"
+                        });
                 });
 
             modelBuilder.Entity("Real_Estate.Model.Imovel", b =>
@@ -126,9 +189,8 @@ namespace Real_Estate.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("_tipoImove")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(15)");
+                    b.Property<int>("_tipoImovel")
+                        .HasColumnType("INT");
 
                     b.Property<decimal>("comprimento")
                         .HasColumnType("DECIMAL(5,2)");
@@ -161,6 +223,41 @@ namespace Real_Estate.Migrations
                     b.HasIndex("proprietariocod_proprietario");
 
                     b.ToTable("Imoveis");
+
+                    b.HasData(
+                        new
+                        {
+                            cod_imovel = 1,
+                            _tipoImovel = 0,
+                            comprimento = 25m,
+                            descricao = "Lugar agradavel com vista para calçada!",
+                            largura = 25m,
+                            metro_quadrado = 625m,
+                            numero_banheiros = (byte)1,
+                            numero_quartos = (byte)4
+                        },
+                        new
+                        {
+                            cod_imovel = 2,
+                            _tipoImovel = 0,
+                            comprimento = 51m,
+                            descricao = "Lindo, apenas.",
+                            largura = 50m,
+                            metro_quadrado = 2550m,
+                            numero_banheiros = (byte)2,
+                            numero_quartos = (byte)5
+                        },
+                        new
+                        {
+                            cod_imovel = 3,
+                            _tipoImovel = 1,
+                            comprimento = 20m,
+                            descricao = "Apartamento com uma varanda linda para o mar!",
+                            largura = 20m,
+                            metro_quadrado = 400m,
+                            numero_banheiros = (byte)1,
+                            numero_quartos = (byte)2
+                        });
                 });
 
             modelBuilder.Entity("Real_Estate.Model.Proprietario", b =>
@@ -182,6 +279,29 @@ namespace Real_Estate.Migrations
                     b.HasKey("cod_proprietario");
 
                     b.ToTable("Proprietarios");
+
+                    b.HasData(
+                        new
+                        {
+                            cod_proprietario = 1,
+                            email = "matmau11@hotmail.com",
+                            nome_proprietario = "Matheus Costa dos Santos",
+                            telefone = "954946842"
+                        },
+                        new
+                        {
+                            cod_proprietario = 2,
+                            email = "maumau11@hotmail.com",
+                            nome_proprietario = "Mauricio Potter dos Santos",
+                            telefone = "986174471"
+                        },
+                        new
+                        {
+                            cod_proprietario = 3,
+                            email = "dorivalodbrok@hotmail.com",
+                            nome_proprietario = "Dorival Lodbrok",
+                            telefone = "979564471"
+                        });
                 });
 
             modelBuilder.Entity("Real_Estate.Model.Apartamento", b =>
@@ -201,9 +321,9 @@ namespace Real_Estate.Migrations
                         .WithMany()
                         .HasForeignKey("Imovelcod_imovel");
 
-                    b.HasOne("Real_Estate.Model.Proprietario", "Proprietario")
+                    b.HasOne("Real_Estate.Model.Proprietario", "proprietario")
                         .WithMany()
-                        .HasForeignKey("Proprietariocod_proprietario");
+                        .HasForeignKey("proprietariocod_proprietario");
                 });
 
             modelBuilder.Entity("Real_Estate.Model.Imovel", b =>
