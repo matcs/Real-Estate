@@ -23,12 +23,12 @@ namespace Real_Estate.Controllers
 
         // GET: api/Imoveis
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Object>>> GetImoveis()
+        public async Task<ActionResult<IEnumerable<Imovel>>> GetImoveis()
         {
-            var Imoveis =
+            /*var Imoveis =
                 (from imovel in _context.Imoveis
                  join endereco in _context.Enderecos
-                 on imovel.endereco.cod_endereco equals endereco.cod_endereco
+                 on imovel.EnderecoRefId equals endereco.cod_endereco
                  select new
                  {                      
                      endereco.logradouro,
@@ -43,7 +43,9 @@ namespace Real_Estate.Controllers
                      imovel.numero_quartos,
                  }
                  );
-            return await Imoveis.ToListAsync();
+            return await Imoveis.ToListAsync();*/
+
+            return await _context.Imoveis.ToListAsync();
         }
 
         // GET: api/Imoveis/5
@@ -54,14 +56,12 @@ namespace Real_Estate.Controllers
             var ImovelDetails =
                 (from imovel in _context.Imoveis
                  join endereco in _context.Enderecos
-                 on imovel.endereco.cod_endereco equals endereco.cod_endereco
-                 where imovel.endereco.cod_endereco == id
+                 on imovel.EnderecoRefId equals endereco.cod_endereco
+                 where imovel.EnderecoRefId == id
                  select new
                  {
                      imovel.cod_imovel,
                      imovel.descricao,
-                     imovel.largura,
-                     imovel.comprimento,
                      imovel.metro_quadrado,
                      imovel.numero_banheiros,
                      imovel.numero_quartos,

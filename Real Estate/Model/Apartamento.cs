@@ -18,11 +18,9 @@ namespace Real_Estate.Model
         [Column(TypeName = "TINYINT")]
         public int numero_bloco { get; set; }
 
+        [ForeignKey("Imovel")]
         [Column(TypeName = "INT")]
-        public Proprietario Proprietario { get; set; }
-
-        [Column(TypeName = "INT")]
-        public Imovel Imovel { get; set; }
+        public int ImovelRefId { get; set; }
 
         public Apartamento ( ) { }
 

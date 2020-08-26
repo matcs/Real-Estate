@@ -28,11 +28,9 @@ namespace Real_Estate.Model
         [Column(TypeName = "DECIMAL(5,2)")]
         public float valor_p_metro2 { get; set; }
 
+        [ForeignKey("Imovel")]
         [Column(TypeName = "INT")]
-        public Proprietario proprietario { get; set; }
-
-        [Column(TypeName = "INT")]
-        public Imovel Imovel { get; set; }
+        public int ImovelRefId { get; set; }
 
         public Casa() { }
 

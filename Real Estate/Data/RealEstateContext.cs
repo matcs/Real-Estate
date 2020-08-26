@@ -29,6 +29,7 @@ namespace Real_Estate.Data
                     cod_proprietario=1,
                     nome_proprietario="Matheus Costa dos Santos",
                     email="matmau11@hotmail.com",
+                    senha="matmau11",
                     telefone="954946842"
                 },
                 new Proprietario
@@ -36,6 +37,7 @@ namespace Real_Estate.Data
                     cod_proprietario = 2,
                     nome_proprietario = "Mauricio Potter dos Santos",
                     email = "maumau11@hotmail.com",
+                    senha = "maumau11",
                     telefone = "986174471"
                 },
                 new Proprietario
@@ -43,6 +45,7 @@ namespace Real_Estate.Data
                     cod_proprietario = 3,
                     nome_proprietario = "Dorival Lodbrok",
                     email = "dorivalodbrok@hotmail.com",
+                    senha = "doridori11",
                     telefone = "979564471"
                 }
             );
@@ -91,37 +94,38 @@ namespace Real_Estate.Data
                 new Imovel
                 {
                     cod_imovel = 1,
-                    largura = 25,
-                    comprimento = 25,
                     metro_quadrado = 625,
                     descricao = "Lugar agradavel com vista para calçada!",
                     numero_quartos = 4,
                     numero_banheiros = 1,
-                    _tipoImovel = 0
+                    _tipoImovel = 0,
+                    ProprietarioRefId = 1,
+                    EnderecoRefId = 1
+
 
                 },
                 new Imovel
                 {
                     cod_imovel = 2,
-                    largura = 50,
-                    comprimento = 51,
                     metro_quadrado = 2550,
                     descricao = "Lindo, apenas.",
                     numero_quartos = 5,
                     numero_banheiros = 2,
-                    _tipoImovel = 0
+                    _tipoImovel = 0,
+                    ProprietarioRefId = 2,
+                    EnderecoRefId = 2
 
                 },
                 new Imovel
                 {
                     cod_imovel = 3,
-                    largura = 20,
-                    comprimento = 20,
                     metro_quadrado = 400,
                     descricao = "Apartamento com uma varanda linda para o mar!",
                     numero_quartos = 2,
                     numero_banheiros = 1,
-                    _tipoImovel = (Enums.TipoImovel)1
+                    _tipoImovel = (Enums.TipoImovel)1,
+                    ProprietarioRefId = 3,
+                    EnderecoRefId = 3
 
                 }
             );
@@ -135,6 +139,7 @@ namespace Real_Estate.Data
                     garagem = true,
                     numero_vagas = 1,
                     valor_p_metro2 = 25,
+                    ImovelRefId = 1
                 },
                 new Casa
                 {
@@ -144,6 +149,7 @@ namespace Real_Estate.Data
                     garagem = true,
                     numero_vagas = 1,
                     valor_p_metro2 = 30,
+                    ImovelRefId = 2
                 }
 
             );
@@ -153,7 +159,8 @@ namespace Real_Estate.Data
                 {
                     cod_apartamento = 1,
                     nome_bloco = "Andorinha",
-                    numero_bloco = 9
+                    numero_bloco = 9,
+                    ImovelRefId = 3
                 }
             );
             base.OnModelCreating(modelBuilder);

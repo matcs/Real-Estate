@@ -1,16 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Real_Estate.Data;
+using Real_Estate.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Nancy.Json;
-using Real_Estate.Data;
-using Real_Estate.Model;
 
 namespace Real_Estate.Controllers
-{
+{   
     [Route("api/[controller]")]
     [ApiController]
     public class ProprietariosController : ControllerBase
@@ -37,10 +35,10 @@ namespace Real_Estate.Controllers
             var ProprietarioImoveis =
                 (from propri in _context.Proprietarios
                  join imovel in _context.Imoveis
-                 on propri.cod_proprietario equals imovel.proprietario.cod_proprietario
+                 on propri.cod_proprietario equals imovel.ProprietarioRefId
                  where propri.cod_proprietario == id
                  join endereco in _context.Enderecos
-                 on imovel.endereco.cod_endereco equals endereco.cod_endereco
+                 on imovel.EnderecoRefId equals endereco.cod_endereco
                  select new
                  {
                      imovel.cod_imovel,
@@ -105,6 +103,19 @@ namespace Real_Estate.Controllers
             return NoContent();
         }
 
+        [HttpPost("Login")]
+        public async Task<ActionResult<Proprietario>> Login(Proprietario ProprietarioPost, int id)
+        {
+            var proprietario = await _context.Proprietarios.Where(x => x.email == ProprietarioPost.email).FirstAsync();
+
+            if (proprietario.senha != ProprietarioPost.senha)
+            {
+                return NotFound();
+            }
+            
+            return proprietario;
+        }
+
         // POST: api/Proprietarios
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -116,6 +127,8 @@ namespace Real_Estate.Controllers
 
             return CreatedAtAction("GetProprietario", new { id = proprietario.cod_proprietario }, proprietario);
         }
+
+        
 
         // DELETE: api/Proprietarios/5
         [HttpDelete("{id}")]
